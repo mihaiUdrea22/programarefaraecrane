@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { Menu, X } from "lucide-react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faInstagram, faTiktok } from "@fortawesome/free-brands-svg-icons";
 
 
 
@@ -127,19 +128,19 @@ export default function HomePage() {
 
 {/* ====================== ENHANCED MODERN NAVBAR ====================== */}
 <nav
-      className={`fixed top-0 left-0 w-full p-5 md:p-6 flex items-center justify-between transition-all duration-300 z-50 ${
-        isScrolled ? "bg-black/70 backdrop-blur-lg shadow-lg" : "bg-transparent"
+      className={`fixed top-0 left-0 w-full px-6 md:px-12 py-4 flex items-center justify-between transition-all duration-300 z-50 ${
+        isScrolled ? "bg-black/80 backdrop-blur-lg shadow-lg" : "bg-transparent"
       }`}
     >
-      {/* Site Title - Click to Scroll to Top */}
+      {/* 🔹 Logo - Scroll to Top */}
       <h1
-        className="text-2xl font-bold text-white cursor-pointer mx-auto md:ml-8 md:mr-auto tracking-wide"
+        className="text-2xl font-extrabold text-white cursor-pointer mx-auto md:mx-0 tracking-wide hover:scale-105 transition-transform"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         Programare Fără Ecrane
       </h1>
 
-      {/* Desktop Navigation */}
+      {/* 🔹 Desktop Navigation */}
       <div className="hidden md:flex space-x-8 text-white text-lg">
         {[
           { name: "Module", href: "#modules" },
@@ -157,26 +158,26 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Social Media Icons */}
+      {/* 🔹 Social Media Icons - Desktop */}
       <div className="hidden md:flex space-x-5">
         {[
-          { href: "https://facebook.com", icon: "fab fa-facebook", color: "text-blue-500" },
-          { href: "https://instagram.com", icon: "fab fa-instagram", color: "text-pink-500" },
-          { href: "https://tiktok.com", icon: "fab fa-tiktok", color: "text-black" },
+          { href: "https://facebook.com", icon: faFacebookF, color: "text-blue-500" },
+          { href: "https://instagram.com", icon: faInstagram, color: "text-pink-500" },
+          { href: "https://tiktok.com", icon: faTiktok, color: "text-black" },
         ].map((social) => (
           <a
             key={social.href}
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:${social.color}`}
+            className="text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:text-white"
           >
-            <i className={social.icon}></i>
+            <FontAwesomeIcon icon={social.icon} />
           </a>
         ))}
       </div>
 
-      {/* Mobile Menu Button */}
+      {/* 🔹 Mobile Menu Button */}
       <button
         className="md:hidden text-white text-3xl"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -184,7 +185,7 @@ export default function HomePage() {
         {isMenuOpen ? <X size={30} /> : <Menu size={30} />}
       </button>
 
-      {/* Mobile Dropdown Menu */}
+      {/* 🔹 Mobile Dropdown Menu */}
       {isMenuOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -206,21 +207,21 @@ export default function HomePage() {
             </a>
           ))}
 
-          {/* Social Media in Mobile Menu */}
-          <div className="flex space-x-5">
+          {/* 🔹 Social Media in Mobile Menu */}
+          <div className="flex space-x-5 pt-4">
             {[
-              { href: "https://facebook.com", icon: "fab fa-facebook", color: "text-blue-500" },
-              { href: "https://instagram.com", icon: "fab fa-instagram", color: "text-pink-500" },
-              { href: "https://tiktok.com", icon: "fab fa-tiktok", color: "text-black" },
+              { href: "https://facebook.com", icon: faFacebookF, color: "text-blue-500" },
+              { href: "https://instagram.com", icon: faInstagram, color: "text-pink-500" },
+              { href: "https://tiktok.com", icon: faTiktok, color: "text-black" },
             ].map((social) => (
               <a
                 key={social.href}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:${social.color}`}
+                className="text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:text-white"
               >
-                <i className={social.icon}></i>
+                <FontAwesomeIcon icon={social.icon} />
               </a>
             ))}
           </div>
