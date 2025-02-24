@@ -335,7 +335,23 @@ export default function HomePage() {
   </div>
 </section>
 
-
+  {/* ====================== PRICING SECTION ====================== */}
+  <section className="py-10 bg-gray-100 text-center">
+  <div className="max-w-4xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-gray-900 mb-4">💰 Tarif: 100 RON / oră / copil</h2>
+    <p className="text-lg text-gray-700">
+      Oferim sesiuni educative captivante și interactive, fără ecrane, care stimulează gândirea logică și creativitatea copiilor.
+    </p>
+    <div className="mt-6">
+      <a
+        href="#contact"
+        className="px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105"
+      >
+        Înscrie-l pe copilul tău 🚀
+      </a>
+    </div>
+  </div>
+</section>
 
      {/* ====================== ADDITIONAL SECTION ====================== */}
 <section className="py-20 bg-gradient-to-r from-blue-100 via-white to-blue-100 text-black flex flex-col items-center relative overflow-hidden">
