@@ -472,7 +472,7 @@ export default function HomePage() {
         
         const formData = new FormData(e.target as HTMLFormElement);
 
-        // Send email via 
+        // Send email
         const response = await fetch("https://formspree.io/f/mwpvdbky", {
           method: "POST",
           body: formData,
