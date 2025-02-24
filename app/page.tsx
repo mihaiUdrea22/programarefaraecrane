@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import { Menu, X } from "lucide-react";
+
 
 
 
@@ -12,11 +14,16 @@ interface ModuleItem {
   title: string;
   description: string;
   image: string;
+  extraDetails: string;
+  
 }
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedModule, setSelectedModule] = useState<ModuleItem | null>(null);
+
+  const [messageSent, setMessageSent] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -24,32 +31,38 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const modules: ModuleItem[] = [
+
+  const modules = [
     {
       id: 1,
       title: "Exploratori Logici",
       description: "Dezvoltă gândirea critică și capacitatea de rezolvare a problemelor.",
       image: "/images/logica.webp",
+      extraDetails: "Jocurile logice îmbunătățesc memoria și dezvoltă atenția la detalii!",
     },
     {
       id: 2,
       title: "Aventură în Cod",
       description: "Învață bazele programării prin jocuri interactive.",
       image: "/images/aventura.webp",
+      extraDetails: "Copiii care învață codare dezvoltă abilități de rezolvare a problemelor mai rapid!",
     },
     {
       id: 3,
       title: "Creativitate și Algoritmi",
       description: "Încurajează creativitatea prin provocări logice.",
       image: "/images/creativitate.webp",
+      extraDetails: "Algoritmii sunt folosiți zilnic, de la căutări Google până la recomandări pe YouTube!",
     },
     {
       id: 4,
       title: "Puzzle-ul Minții",
       description: "Exersează memoria și logica prin activități captivante.",
       image: "/images/puzzel.webp",
+      extraDetails: "Puzzle-urile ajută la dezvoltarea răbdării și a gândirii critice!",
     },
   ];
+  
 
   return (
     <div className="relative w-full">
@@ -112,46 +125,108 @@ export default function HomePage() {
 
 
 
-
- {/* ====================== MODERN NAVBAR WITH SOCIAL MEDIA ====================== */}
+{/* ====================== ENHANCED MODERN NAVBAR ====================== */}
 <nav
-  className={`fixed top-0 left-0 w-full p-6 flex justify-between items-center transition-all duration-300 z-50 ${
-    isScrolled ? "bg-black/90 backdrop-blur-lg shadow-lg" : "bg-transparent"
-  }`}
->
-  {/* Site Title */}
-  <h1 className="text-2xl font-bold text-white ml-6 md:ml-10">
-    Programare fără ecrane
-  </h1>
-  {/* Navigation Links */}
-  <div className="hidden md:flex space-x-8 text-white-700 text-lg">
-    <a href="#modules" className="relative group">
-      Module
-      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#about" className="relative group">
-      Despre noi
-      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#contact" className="relative group">
-      Contact
-      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-  </div>
+      className={`fixed top-0 left-0 w-full p-5 md:p-6 flex items-center justify-between transition-all duration-300 z-50 ${
+        isScrolled ? "bg-black/70 backdrop-blur-lg shadow-lg" : "bg-transparent"
+      }`}
+    >
+      {/* Site Title - Click to Scroll to Top */}
+      <h1
+        className="text-2xl font-bold text-white cursor-pointer mx-auto md:ml-8 md:mr-auto tracking-wide"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        Programare Fără Ecrane
+      </h1>
 
-  {/* Social Media Icons */}
-  <div className="flex space-x-4">
-    <a href="https://facebook.com" target="_blank" className="text-gray-700 text-2xl hover:text-blue-600 transition">
-      <i className="fab fa-facebook"></i>
-    </a>
-    <a href="https://instagram.com" target="_blank" className="text-gray-700 text-2xl hover:text-pink-500 transition">
-      <i className="fab fa-instagram"></i>
-    </a>
-    <a href="https://tiktok.com" target="_blank" className="text-gray-700 text-2xl hover:text-black transition">
-      <i className="fab fa-tiktok"></i>
-    </a>
-  </div>
-</nav>
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex space-x-8 text-white text-lg">
+        {[
+          { name: "Module", href: "#modules" },
+          { name: "Despre Noi", href: "#about" },
+          { name: "Contact", href: "#contact" },
+        ].map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            className="relative group transition-transform duration-300 hover:scale-105"
+          >
+            {item.name}
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+      </div>
+
+      {/* Social Media Icons */}
+      <div className="hidden md:flex space-x-5">
+        {[
+          { href: "https://facebook.com", icon: "fab fa-facebook", color: "text-blue-500" },
+          { href: "https://instagram.com", icon: "fab fa-instagram", color: "text-pink-500" },
+          { href: "https://tiktok.com", icon: "fab fa-tiktok", color: "text-black" },
+        ].map((social) => (
+          <a
+            key={social.href}
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:${social.color}`}
+          >
+            <i className={social.icon}></i>
+          </a>
+        ))}
+      </div>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-white text-3xl"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        {isMenuOpen ? <X size={30} /> : <Menu size={30} />}
+      </button>
+
+      {/* Mobile Dropdown Menu */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-full left-0 w-full bg-black/90 backdrop-blur-lg shadow-lg flex flex-col items-center py-6 space-y-4"
+        >
+          {[
+            { name: "Module", href: "#modules" },
+            { name: "Despre Noi", href: "#about" },
+            { name: "Contact", href: "#contact" },
+          ].map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-white text-lg transition hover:text-blue-400"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+
+          {/* Social Media in Mobile Menu */}
+          <div className="flex space-x-5">
+            {[
+              { href: "https://facebook.com", icon: "fab fa-facebook", color: "text-blue-500" },
+              { href: "https://instagram.com", icon: "fab fa-instagram", color: "text-pink-500" },
+              { href: "https://tiktok.com", icon: "fab fa-tiktok", color: "text-black" },
+            ].map((social) => (
+              <a
+                key={social.href}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-gray-400 text-2xl transition-transform duration-300 hover:scale-110 hover:${social.color}`}
+              >
+                <i className={social.icon}></i>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </nav>
 
 
 
@@ -383,80 +458,122 @@ export default function HomePage() {
       Trimite-ne un mesaj și îți vom răspunde cât mai curând posibil!
     </p>
 
-    {/* Contact Form - Floating Card Style */}
-    <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl p-10 relative">
-      <form>
-        {/* Name Input */}
-        <div className="mb-6 relative">
-          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
-            Nume
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder="Introdu numele tău"
-              required
-            />
-            <span className="absolute right-4 top-3 text-gray-400">👤</span>
-          </div>
-        </div>
+ {/* Contact Form - Floating Card Style */}
+{/* Contact Form - Floating Card Style */}
+<div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl p-10 relative">
+  {messageSent ? (
+    <div className="text-green-600 text-lg text-center font-semibold">
+      ✅ Mesajul tău a fost trimis cu succes! Te vom contacta în curând.
+    </div>
+  ) : (
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target as HTMLFormElement);
 
-        {/* Email Input */}
-        <div className="mb-6 relative">
-          <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-            Email
-          </label>
-          <div className="relative">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder="Introdu adresa de email"
-              required
-            />
-            <span className="absolute right-4 top-3 text-gray-400">📧</span>
-          </div>
-        </div>
+        // Send email via Formspree
+        const response = await fetch("https://formspree.io/f/mwpvdbky", {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        });
 
-        {/* Message Input */}
-        <div className="mb-6">
-          <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-            Mesaj
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={4}
+        if (response.ok) {
+          setMessageSent(true);
+
+          // Simulate a delay before redirecting
+          setTimeout(() => {
+            window.location.href = "#contact"; // Redirect user back to contact section
+          }, 3000);
+
+          (e.target as HTMLFormElement).reset(); // Reset form after submission
+        } else {
+          alert("❌ Oops! A apărut o eroare. Încearcă din nou.");
+        }
+      }}
+    >
+      {/* Name Input */}
+      <div className="mb-6 relative">
+        <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+          Nume
+        </label>
+        <div className="relative">
+          <input
+            type="text"
+            id="name"
+            name="name"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            placeholder="Scrie mesajul tău aici..."
+            placeholder="Introdu numele tău"
             required
-          ></textarea>
+          />
+          <span className="absolute right-4 top-3 text-gray-400">👤</span>
         </div>
+      </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:from-blue-700 hover:to-purple-700 transition-transform transform hover:scale-105"
-        >
-          Trimite Mesaj 🚀
-        </button>
-      </form>
-    </div>
+      {/* Email Input */}
+      <div className="mb-6 relative">
+        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+          Email
+        </label>
+        <div className="relative">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            placeholder="Introdu adresa de email"
+            required
+          />
+          <span className="absolute right-4 top-3 text-gray-400">📧</span>
+        </div>
+      </div>
 
-    {/* Call-to-Action Box */}
-    <div className="mt-16 max-w-5xl mx-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8 rounded-2xl text-center shadow-xl">
-      <h3 className="text-2xl font-bold">📞 Preferi să ne suni?</h3>
-      <p className="mt-2 text-lg">Ne poți contacta la <strong className="underline">+40 123 456 789</strong></p>
-    </div>
+      {/* Message Input */}
+      <div className="mb-6">
+        <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
+          Mesaj
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={4}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Scrie mesajul tău aici..."
+          required
+        ></textarea>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:from-blue-700 hover:to-purple-700 transition-transform transform hover:scale-105"
+      >
+        Trimite Mesaj 🚀
+      </button>
+    </form>
+  )}
+</div>
+
+
+
+
+
+  {/* Call-to-Action Box */}
+<div className="mt-16 max-w-5xl mx-auto bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8 rounded-2xl text-center shadow-xl">
+  <h3 className="text-2xl font-bold">📞 Preferi să ne suni?</h3>
+  <p className="mt-2 text-lg">
+    Ne poți contacta la{" "}
+    <a href="tel:+40726106381" className="underline font-bold hover:text-yellow-300 transition">
+      +40 726 106 381
+    </a>
+  </p>
+</div>
+
   </div>
 </section>
 
 
-   {/* ====================== MODERN POP-UP MODAL ====================== */}
 {selectedModule && (
   <motion.div
     className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-lg z-50"
@@ -499,10 +616,12 @@ export default function HomePage() {
         {selectedModule.description}
       </p>
 
-      {/* Extra Details Box */}
-      <div className="mt-6 bg-gray-100 p-4 rounded-xl shadow-inner text-gray-600 text-sm">
-        📌 <span className="font-semibold">Știai că?</span> Acest modul este special creat pentru a stimula creativitatea și gândirea logică!
-      </div>
+      {/* Extra Details Box - Unique for Each Module */}
+      {selectedModule.extraDetails && (
+        <div className="mt-6 bg-gray-100 p-4 rounded-xl shadow-inner text-gray-600 text-sm">
+          📌 <span className="font-semibold">Știai că?</span> {selectedModule.extraDetails}
+        </div>
+      )}
 
       {/* CTA Button */}
       <div className="mt-6">
