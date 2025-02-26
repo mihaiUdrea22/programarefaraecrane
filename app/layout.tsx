@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Programare Fără Ecrane",
     images: [
       {
-        url: "/programarefaraecrane.png", // Imaginea pe care ai pus-o în public/
+        url: "https://www.programarefaraecrane.ro/programarefaraecrane.png", // Imaginea pe care ai pus-o în public/
         width: 1200,
         height: 1080,
         alt: "Programare Fără Ecrane - Învățare Interactivă pentru Copii",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Programare Fără Ecrane",
     description: "Învățare interactivă pentru copii prin jocuri educative fără ecrane!",
-    images: ["/programarefaraecrane.png"], // Aceeași imagine și pentru Twitter
+    images: ["https://www.programarefaraecrane.ro/programarefaraecrane.png"], // Aceeași imagine și pentru Twitter
   },
 };
 
