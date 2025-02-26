@@ -70,7 +70,7 @@ export default function HomePage() {
   {/* ====================== HERO SECTION ====================== */}
   <motion.div
     className="relative h-screen w-full bg-cover bg-center flex flex-col items-center justify-center text-center text-white p-6"
-    style={{ backgroundImage: "url('/images/ideea.jpg')" }}
+    style={{ backgroundImage: "url('/images/programmingKids.jpg')" }}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 1 }}
